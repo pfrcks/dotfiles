@@ -39,6 +39,7 @@ Plugin 'vim-scripts/indentpython.vim'
 "Bundle 'Valloric/YouCompleteMe'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'majutsushi/tagbar'
 Plugin 'nvie/vim-flake8'
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
@@ -209,7 +210,7 @@ set wildignore+=*/coverage/*
 
 map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
-let g:ycm_python_binary_path='/root/anaconda2/bin/python2.7'
+let g:ycm_python_binary_path='/home/watson/anaconda2/bin/python2.7'
 map <C-n> :NERDTreeToggle<CR>
 
 set tabstop=4
@@ -273,3 +274,8 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+nnoremap <esc> :noh<return><esc>
+nnoremap <esc>^[ <esc>^[
+
+cmap w!! w !sudo tee >/dev/null %

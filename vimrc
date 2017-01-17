@@ -20,11 +20,20 @@
 " Ctrl+q  - Quit the file.
 " Ctrl+n  - Open file explorer in vim.
 " Ctrl+p  - Open file searcher in vim.
+" zM      - Close all folds
+" zR      - Open all folds
 
+" Jedi Vim Shortcuts
+" ~~~~~~~~~~~~~~~~~~
+" <leader>g             - Goto assignments
+" <leader>d             - Goto Definition
+" K                     - Show Documentation
+" <leader>n             - Show all usages
+" :Pyimport module name - Opens the module
 
 call plug#begin('~/.vim/bundle/')
 
-Plug 'tmhedberg/SimpylFold'                           " Enables better folding
+Plug 'tmhedberg/SimpylFold'                           " Enables better folding for Python
 Plug 'vim-scripts/indentpython.vim'                   " Better Indentation
 Plug 'davidhalter/jedi-vim', { 'on': [] }             " Auto-completion and other IDE features
 Plug 'scrooloose/syntastic'                           " Syntax checkers
@@ -117,6 +126,7 @@ imap <down> <nop>
 imap <up> <nop>
 imap <right> <nop>
 nmap <expr>  M  ':%s/' . @/ . '//g<LEFT><LEFT>'                        " M replaces the last searched string with input
+nmap <Leader><space> :TagbarToggle<CR>                                 " ,space toggles TagBar
 nnoremap <F8> :call SCLToggle()<cr>
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[                                               " Esc Esc disables search highlighting
@@ -209,6 +219,11 @@ set ttyfast
 "endif
 
 colorscheme molokai
+highlight link Flake8_Error      Error
+highlight link Flake8_Warning    WarningMsg
+highlight link Flake8_Complexity WarningMsg
+highlight link Flake8_Naming     WarningMsg
+highlight link Flake8_PyFlake    WarningMsg
 highlight ColorColumn ctermbg=233
 
 
@@ -237,4 +252,5 @@ let g:jedi#show_call_signatures = "0"
 let g:peekaboo_prefix = '<leader>'
 let g:rehash256 = 1
 let g:airline_powerline_fonts = 1
+let g:jedi#use_tabs_not_buffers = 1
 let g:solarized_termcolors=256

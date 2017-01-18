@@ -64,6 +64,7 @@ Plug 'Shougo/vimshell.vim'
 call plug#end()
 
 syntax on                                             " Enable syntax highlighting
+let mapleader = ","
 call togglebg#map("<F5>")                             " Toggle between different colorschemes based on need.
 
 " Autocommands
@@ -137,7 +138,7 @@ nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[                                               " Esc Esc disables search highlighting
 cmap w!! w !sudo tee >/dev/null %                                      " Open again in sudo
 map <C-n> :NERDTreeToggle<CR>                                          " Toggle NerdTree
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>         " Debugging python
+map <Leader>bb Oimport ipdb; ipdb.set_trace() # BREAKPOINT<esc>         " Debugging python
 noremap Y y$                                                           " Yank till end of line
 
 " Helper Functions
@@ -236,7 +237,6 @@ highlight ColorColumn ctermbg=233
 let g:SimpylFold_docstring_preview=1
 let python_highlight_all=1
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-let mapleader = ","
 let g:ctrlp_max_height = 30
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_always_populate_loc_list = 1

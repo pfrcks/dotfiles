@@ -48,6 +48,7 @@ Plug 'kien/ctrlp.vim'                                 " Fuzzy File Finder
 Plug 'vim-airline/vim-airline'                        " Lightweight Status Bar
 Plug 'mhinz/vim-startify'                             " Provides a splash screen for vim
 Plug 'tpope/vim-sensible'                             " Sensible defaults for vim
+Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips', { 'on': [] }                 " Snippets expansion for vim
 Plug 'honza/vim-snippets'                             " Support for Ultisnips
 Plug 'godlygeek/tabular'                              " For alignment of markes
@@ -56,6 +57,10 @@ Plug 'scrooloose/nerdcommenter'                       " Easy commenting
 Plug 'junegunn/vim-peekaboo'                          " Take a sneak peek at registers
 Plug 'junegunn/limelight.vim'                         " Paired with goyo for super focusing
 Plug 'junegunn/goyo.vim'                              " Distraction free mode for writing
+Plug 'tmhedberg/matchit'
+Plug 'voithos/vim-python-matchit'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'Shougo/vimshell.vim'
 call plug#end()
 
 syntax on                                             " Enable syntax highlighting
@@ -208,7 +213,7 @@ set expandtab
 set ttyfast
 
 
-" Colors 
+" Colors
 
 " Colors based on mode
 " if has('gui_running')
@@ -254,3 +259,5 @@ let g:rehash256 = 1
 let g:airline_powerline_fonts = 1
 let g:jedi#use_tabs_not_buffers = 1
 let g:solarized_termcolors=256
+let g:jedi#auto_close_doc=1
+let g:SuperTabDefaultCompletionType = "<c-n>"

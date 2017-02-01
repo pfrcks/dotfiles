@@ -36,7 +36,7 @@ call plug#begin('~/.vim/bundle/')
 Plug 'tmhedberg/SimpylFold'                           " Enables better folding for Python
 Plug 'vim-scripts/indentpython.vim'                   " Better Indentation
 Plug 'davidhalter/jedi-vim', { 'on': [] }             " Auto-completion and other IDE features
-Plug 'scrooloose/syntastic'                           " Syntax checkers
+Plug 'scrooloose/syntastic', { 'on': [] }                           " Syntax checkers
 Plug 'majutsushi/tagbar'                              " Gives an overview of file structure in a side pane
 Plug 'nvie/vim-flake8'                                " Syntax checker for syntastic
 Plug 'jnurmine/Zenburn'                               " Colorscheme
@@ -61,6 +61,8 @@ Plug 'tmhedberg/matchit'
 Plug 'voithos/vim-python-matchit'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'Shougo/vimshell.vim'
+Plug 'jiangmiao/auto-pairs', {'do' : 'make'}
+Plug 'tommcdo/vim-exchange'
 call plug#end()
 
 syntax on                                             " Enable syntax highlighting
@@ -69,10 +71,10 @@ call togglebg#map("<F5>")                             " Toggle between different
 
 " Autocommands
 
-augroup load_us_jedivim                               " Lazy loading of Ultisnips and Jedi-Vim : Saves time
+augroup load_on_insert                               " Lazy loading of Ultisnips and Jedi-Vim : Saves time
   autocmd!
-  autocmd InsertEnter * call plug#load('ultisnips', 'jedi-vim')
-                     \| autocmd! load_us_jedivim
+  autocmd InsertEnter * call plug#load('ultisnips', 'jedi-vim', 'syntastic', 'auto-pairs')
+                     \| autocmd! load_on_insert
 augroup END
 
 if has("autocmd")
@@ -140,7 +142,6 @@ cmap w!! w !sudo tee >/dev/null %                                      " Open ag
 map <C-n> :NERDTreeToggle<CR>                                          " Toggle NerdTree
 map <Leader>bb Oimport ipdb; ipdb.set_trace() # BREAKPOINT<esc>         " Debugging python
 noremap Y y$                                                           " Yank till end of line
-
 " Helper Functions
 
 function! SCLToggle()
@@ -224,7 +225,7 @@ set ttyfast
 "  colorscheme desert
 "endif
 
-colorscheme molokai
+colorscheme moonshine
 highlight link Flake8_Error      Error
 highlight link Flake8_Warning    WarningMsg
 highlight link Flake8_Complexity WarningMsg
@@ -261,3 +262,10 @@ let g:jedi#use_tabs_not_buffers = 1
 let g:solarized_termcolors=256
 let g:jedi#auto_close_doc=1
 let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ -g ""'

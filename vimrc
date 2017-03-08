@@ -33,7 +33,7 @@
 
 call plug#begin('~/.vim/bundle/')
 
-Plug 'tmhedberg/SimpylFold'                           " Enables better folding for Python
+"Plug 'tmhedberg/SimpylFold'                           " Enables better folding for Python
 Plug 'vim-scripts/indentpython.vim'                   " Better Indentation
 Plug 'davidhalter/jedi-vim', { 'on': [] }             " Auto-completion and other IDE features
 Plug 'scrooloose/syntastic', { 'on': [] }                           " Syntax checkers
@@ -45,7 +45,7 @@ Plug 'flazz/vim-colorschemes'                         " Pack of Colorschemes
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'} " Fast and efficient File Browser
 Plug 'jistr/vim-nerdtree-tabs'                        " Makes NerdTree behave like a file manager
 Plug 'kien/ctrlp.vim'                                 " Fuzzy File Finder
-Plug 'vim-airline/vim-airline'                        " Lightweight Status Bar
+"Plug 'vim-airline/vim-airline'                        " Lightweight Status Bar
 Plug 'mhinz/vim-startify'                             " Provides a splash screen for vim
 Plug 'tpope/vim-sensible'                             " Sensible defaults for vim
 Plug 'ervandew/supertab'
@@ -61,7 +61,9 @@ Plug 'tmhedberg/matchit'
 Plug 'voithos/vim-python-matchit'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'Shougo/vimshell.vim'
-Plug 'jiangmiao/auto-pairs', {'do' : 'make'}
+"Plug 'jiangmiao/auto-pairs', {'do' : 'make'}
+Plug 'vim-scripts/vim-auto-save'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'tommcdo/vim-exchange'
 call plug#end()
 
@@ -179,6 +181,8 @@ endfunction
 
 set nocompatible              " required
 set virtualedit=onemore
+set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+set statusline+=\ %{strftime(\"%H:%M\")}
 set splitbelow
 set splitright
 set foldmethod=indent
@@ -269,3 +273,6 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .DS_Store
       \ --ignore "**/*.pyc"
       \ -g ""'
+let g:auto_save_in_insert_mode = 0
+let g:auto_save=1
+let g:auto_save_no_updatetime = 1 

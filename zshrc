@@ -1,14 +1,21 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/watson/.oh-my-zsh
+  export ZSH=/root/.oh-my-zsh
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="gozilla"
-
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+ZSH_THEME="fishy"
+SAVEHIST=40000 # Number of entries
+HISTSIZE=40000
+HISTFILE=~/.zsh/history # File
+setopt APPEND_HISTORY # Don't erase history
+setopt EXTENDED_HISTORY # Add additional data to history like timestamp
+setopt INC_APPEND_HISTORY # Add immediately
+setopt HIST_FIND_NO_DUPS # Don't show duplicates in search
+setopt HIST_IGNORE_SPACE # Don't preserve spaces. You may want to turn it off
+setopt NO_HIST_BEEP # Don't beep
+setopt SHARE_HISTORY # Share history between session/terminals
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -51,13 +58,18 @@ ZSH_THEME="gozilla"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git z)
-
-source $ZSH/oh-my-zsh.sh
+plugins=(git zsh-syntax-highlighting z)
 
 # User configuration
 
+# export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
+
+source $ZSH/oh-my-zsh.sh
+export TERM=xterm-256color
+[ -n "$TMUX" ] && export TERM=screen-256color
+
+fortune | cowsay | lolcat
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -73,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -83,7 +95,16 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
+
+export P4PORT=10.102.1.8:1997
+export P4USER=amolag
+export P4PASSWD="freebsd123"
+export PATH=/root/anaconda2/bin:$PATH
+
+vimrem() {
+    vi scp://root@$1/$2
+}
+
 findnamefromroot() {
     find / -name $1
 }
@@ -92,15 +113,15 @@ findstringinfile() {
     grep -rnw $1 -e $2
 }
 
+findprocess() {
+    ps -ef | grep $1
+}
+
 alias findn=findnamefromroot
 alias greps=findstringinfile
-
-export PATH="/home/watson/anaconda2/bin:$PATH"
-
-export TERM="xterm-256color"
-
-setopt RM_STAR_WAIT
-
-setopt interactivecomments
-
-alias serve='python -m SimpleHTTPServer'
+alias vir=vimrem
+alias findp=findprocess
+alias lsd='cd ~/ws/trunk/DevTest/ninedottwo/'
+export M2_HOME=/usr/local/apache-maven/apache-maven-3.3.9
+export MAVEN_OPTS="-Xms256m -Xmx512m" # Very important to put the "m" on the end
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle

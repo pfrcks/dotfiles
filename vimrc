@@ -33,9 +33,8 @@
 
 call plug#begin('~/.vim/bundle/')
 
-"Plug 'tmhedberg/SimpylFold'                           " Enables better folding for Python
 Plug 'vim-scripts/indentpython.vim'                   " Better Indentation
-Plug 'davidhalter/jedi-vim', { 'on': [] }             " Auto-completion and other IDE features
+Plug 'davidhalter/jedi-vim'                           " Auto-completion and other IDE features
 Plug 'scrooloose/syntastic', { 'on': [] }                           " Syntax checkers
 Plug 'majutsushi/tagbar'                              " Gives an overview of file structure in a side pane
 Plug 'nvie/vim-flake8'                                " Syntax checker for syntastic
@@ -43,25 +42,18 @@ Plug 'jnurmine/Zenburn'                               " Colorscheme
 Plug 'altercation/vim-colors-solarized'               " Colorscheme
 Plug 'flazz/vim-colorschemes'                         " Pack of Colorschemes
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'} " Fast and efficient File Browser
-Plug 'jistr/vim-nerdtree-tabs'                        " Makes NerdTree behave like a file manager
 Plug 'kien/ctrlp.vim'                                 " Fuzzy File Finder
-"Plug 'vim-airline/vim-airline'                        " Lightweight Status Bar
-Plug 'mhinz/vim-startify'                             " Provides a splash screen for vim
 Plug 'tpope/vim-sensible'                             " Sensible defaults for vim
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips', { 'on': [] }                 " Snippets expansion for vim
 Plug 'honza/vim-snippets'                             " Support for Ultisnips
 Plug 'godlygeek/tabular'                              " For alignment of markes
-Plug 'plasticboy/vim-markdown'                        " For highlighting and syntax of markdown
 Plug 'scrooloose/nerdcommenter'                       " Easy commenting
-Plug 'junegunn/vim-peekaboo'                          " Take a sneak peek at registers
-Plug 'junegunn/limelight.vim'                         " Paired with goyo for super focusing
-Plug 'junegunn/goyo.vim'                              " Distraction free mode for writing
 Plug 'tmhedberg/matchit'
 Plug 'voithos/vim-python-matchit'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'Shougo/vimshell.vim'
-"Plug 'jiangmiao/auto-pairs', {'do' : 'make'}
+Plug 'Shougo/Unite.vim'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tommcdo/vim-exchange'
@@ -75,7 +67,7 @@ call togglebg#map("<F5>")                             " Toggle between different
 
 augroup load_on_insert                               " Lazy loading of Ultisnips and Jedi-Vim : Saves time
   autocmd!
-  autocmd InsertEnter * call plug#load('ultisnips', 'jedi-vim', 'syntastic', 'auto-pairs')
+  autocmd InsertEnter * call plug#load('ultisnips', 'syntastic', 'auto-pairs')
                      \| autocmd! load_on_insert
 augroup END
 
@@ -97,8 +89,6 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red  " Show wh
 au InsertLeave * match ExtraWhitespace /\s\+$/                         " MUST be inserted BEFORE the colorscheme command
 
 
-autocmd! User GoyoEnter nested call <SID>goyo_enter()                  " Execute commands on :Goyo
-autocmd! User GoyoLeave nested call <SID>goyo_leave()                  " Execute commands on :Goyo!
 autocmd! bufwritepost .vimrc source %                                  " Automatic reloading of .vimrc
 
 " Mappings
@@ -110,9 +100,6 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <space> za                                                    " Folding with spacebar
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
-noremap <C-Z> :update<CR>                                              " Save with Ctrl+Z
-vnoremap <C-Z> <C-C>:update<CR>
-inoremap <C-Z> <C-O>:update<CR>
 noremap <Leader>e :quit<CR>                                            " Quit with , + e
 map <Leader>n <esc>:tabprevious<CR>                                    " Easier moving between tabs
 map <Leader>m <esc>:tabnext<CR>
@@ -155,26 +142,6 @@ function! SCLToggle()
         let g:syntastic_enable_signs=1
     endif
     echo g:syntastic_enable_signs
-endfunction
-
-function! s:goyo_enter()
-  silent !tmux set status off
-  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  set noshowmode
-  set noshowcmd
-  set scrolloff=999
-  Limelight
-  " ...
-endfunction
-
-function! s:goyo_leave()
-  silent !tmux set status on
-  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  set showmode
-  set showcmd
-  set scrolloff=5
-  Limelight!
-  " ...
 endfunction
 
 " Set commands
@@ -221,14 +188,6 @@ set ttyfast
 
 " Colors
 
-" Colors based on mode
-" if has('gui_running')
-"  set background=dark
-"  colorscheme solarized
-"else
-"  colorscheme desert
-"endif
-
 colorscheme moonshine
 highlight link Flake8_Error      Error
 highlight link Flake8_Warning    WarningMsg
@@ -239,7 +198,6 @@ highlight ColorColumn ctermbg=233
 
 
 " Initializations and Plugin Specific Commands
-let g:SimpylFold_docstring_preview=1
 let python_highlight_all=1
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 let g:ctrlp_max_height = 30
@@ -249,9 +207,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_quiet_messages = { "type": "style" }
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let g:Powerline_symbols = 'fancy'
 let g:UltiSnipsExpandTrigger="`"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
@@ -259,9 +214,7 @@ let g:UltiSnipsSnippetsDir = "~/.vim/bundle/ultisnips/UltiSnips"
 let g:UltiSnipsEditSplit="vertical"
 let g:flake8_quickfix_height=15
 let g:jedi#show_call_signatures = "0"
-let g:peekaboo_prefix = '<leader>'
 let g:rehash256 = 1
-let g:airline_powerline_fonts = 1
 let g:jedi#use_tabs_not_buffers = 1
 let g:solarized_termcolors=256
 let g:jedi#auto_close_doc=1
@@ -275,4 +228,4 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ -g ""'
 let g:auto_save_in_insert_mode = 0
 let g:auto_save=1
-let g:auto_save_no_updatetime = 1 
+let g:auto_save_no_updatetime = 1

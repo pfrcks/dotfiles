@@ -37,13 +37,14 @@ Plug 'vim-scripts/indentpython.vim'                   " Better Indentation
 Plug 'davidhalter/jedi-vim'                           " Auto-completion and other IDE features
 Plug 'scrooloose/syntastic', { 'on': [] }                           " Syntax checkers
 Plug 'majutsushi/tagbar'                              " Gives an overview of file structure in a side pane
+Plug 'Rip-Rip/clang_complete'                              " Gives an overview of file structure in a side pane
 Plug 'nvie/vim-flake8'                                " Syntax checker for syntastic
-Plug 'jnurmine/Zenburn'                               " Colorscheme
-Plug 'altercation/vim-colors-solarized'               " Colorscheme
 Plug 'flazz/vim-colorschemes'                         " Pack of Colorschemes
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'} " Fast and efficient File Browser
 Plug 'kien/ctrlp.vim'                                 " Fuzzy File Finder
-Plug 'tpope/vim-sensible'                             " Sensible defaults for vim
+if !has('nvim')
+    Plug 'tpope/vim-sensible'                             " Sensible defaults for vim
+endif
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips', { 'on': [] }                 " Snippets expansion for vim
 Plug 'honza/vim-snippets'                             " Support for Ultisnips
@@ -51,23 +52,24 @@ Plug 'godlygeek/tabular'                              " For alignment of markes
 Plug 'scrooloose/nerdcommenter'                       " Easy commenting
 Plug 'tmhedberg/matchit'
 Plug 'voithos/vim-python-matchit'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'Shougo/vimshell.vim'
-Plug 'Shougo/Unite.vim'
+Plug 'Shougo/denite.nvim'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tommcdo/vim-exchange'
+Plug 'will133/vim-dirdiff'
+Plug 'tpope/vim-surround'
+Plug 'easymotion/vim-easymotion'
+Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 syntax on                                             " Enable syntax highlighting
 let mapleader = ","
-call togglebg#map("<F5>")                             " Toggle between different colorschemes based on need.
 
 " Autocommands
 
 augroup load_on_insert                               " Lazy loading of Ultisnips and Jedi-Vim : Saves time
   autocmd!
-  autocmd InsertEnter * call plug#load('ultisnips', 'syntastic', 'auto-pairs')
+  autocmd InsertEnter * call plug#load('ultisnips', 'syntastic')
                      \| autocmd! load_on_insert
 augroup END
 
@@ -161,7 +163,7 @@ set nu
 set relativenumber
 set backspace=indent,eol,start
 set pastetoggle=<F2>
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 set go+=a
 set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
@@ -229,3 +231,5 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 let g:auto_save_in_insert_mode = 0
 let g:auto_save=1
 let g:auto_save_no_updatetime = 1
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+let g:clang_library_path='/usr/lib/llvm-3.4/lib/libclang.so'

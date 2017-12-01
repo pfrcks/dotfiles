@@ -34,10 +34,10 @@
 call plug#begin('~/.vim/bundle/')
 
 Plug 'vim-scripts/indentpython.vim'                   " Better Indentation
-Plug 'davidhalter/jedi-vim'                           " Auto-completion and other IDE features
-Plug 'scrooloose/syntastic', { 'on': [] }                           " Syntax checkers
+"Plug 'davidhalter/jedi-vim'                           " Auto-completion and other IDE features
+"Plug 'scrooloose/syntastic', { 'on': [] }                           " Syntax checkers
+Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'                              " Gives an overview of file structure in a side pane
-Plug 'Rip-Rip/clang_complete'                              " Gives an overview of file structure in a side pane
 Plug 'nvie/vim-flake8'                                " Syntax checker for syntastic
 Plug 'flazz/vim-colorschemes'                         " Pack of Colorschemes
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'} " Fast and efficient File Browser
@@ -60,20 +60,47 @@ Plug 'will133/vim-dirdiff'
 Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'rust-lang/rust.vim'
+Plug 'vim-scripts/c.vim'
+Plug 'xolox/vim-notes'
+Plug 'xolox/vim-misc'
+Plug 'reedes/vim-lexical'
+Plug 'fisadev/vim-isort'
+Plug 'Shougo/denite.nvim'
+"Plug 'jeaye/color_coded'
+Plug 'maralla/completor.vim'
+Plug 'kh3phr3n/python-syntax'
+Plug 'mhinz/vim-startify'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'cocopon/iceberg.vim'
+Plug 'wincent/terminus'
+
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 syntax on                                             " Enable syntax highlighting
-let mapleader = ","
+let g:mapleader = ','
 
 " Autocommands
 
 augroup load_on_insert                               " Lazy loading of Ultisnips and Jedi-Vim : Saves time
   autocmd!
-  autocmd InsertEnter * call plug#load('ultisnips', 'syntastic')
+  autocmd InsertEnter * call plug#load('ultisnips')
                      \| autocmd! load_on_insert
 augroup END
 
-if has("autocmd")
+augroup lexical
+  autocmd!
+  autocmd FileType markdown,mkd call lexical#init()
+  autocmd FileType textile call lexical#init()
+  autocmd FileType text call lexical#init({ 'spell': 0 })
+augroup END
+
+if has('autocmd')
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif
 endif
@@ -129,6 +156,7 @@ nmap <Leader><space> :TagbarToggle<CR>                                 " ,space 
 nnoremap <F8> :call SCLToggle()<cr>
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[                                               " Esc Esc disables search highlighting
+nnoremap <Leader>k :YcmCompleter GetDoc <CR>
 cmap w!! w !sudo tee >/dev/null %                                      " Open again in sudo
 map <C-n> :NERDTreeToggle<CR>                                          " Toggle NerdTree
 map <Leader>bb Oimport ipdb; ipdb.set_trace() # BREAKPOINT<esc>         " Debugging python
@@ -138,19 +166,45 @@ noremap Y y$                                                           " Yank ti
 function! SCLToggle()
     set nonumber!
     set relativenumber!
-    if g:syntastic_enable_signs == 1
-        let g:syntastic_enable_signs=0
-    else
-        let g:syntastic_enable_signs=1
-    endif
-    echo g:syntastic_enable_signs
+    "if g:syntastic_enable_signs == 1
+        "let g:syntastic_enable_signs=0
+    "else
+        "let g:syntastic_enable_signs=1
+    "endif
+    "echo g:syntastic_enable_signs
 endfunction
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   l:all_non_errors,
+    \   l:all_errors
+    \)
+endfunction
+function! ProseMode()
+  call goyo#execute(0, [])
+  set spell noci nosi noai nolist noshowmode noshowcmd
+  set complete+=s
+  if !has('gui_running')
+    let g:solarized_termcolors=256
+  endif
+  colors gruvbox
+endfunction
+
+command! ProseMode call ProseMode()
+nmap \p :ProseMode<CR>
+
 
 " Set commands
 
-set nocompatible              " required
+"set nocompatible              " required
 set virtualedit=onemore
-set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+set statusline=%{LinterStatus()}
+set statusline+=\ %t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 set statusline+=\ %{strftime(\"%H:%M\")}
 set splitbelow
 set splitright
@@ -159,14 +213,14 @@ set foldlevel=99
 set encoding=utf-8
 set t_Co=256
 set background=dark
-set nu
+set number
 set relativenumber
 set backspace=indent,eol,start
 set pastetoggle=<F2>
 set clipboard+=unnamedplus
-set go+=a
+set guioptions+=a
 set nowrap  " don't automatically wrap on load
-set fo-=t   " don't automatically wrap text when typing
+set formatoptions-=t   " don't automatically wrap text when typing
 set colorcolumn=120
 set history=700
 set undolevels=700
@@ -190,7 +244,8 @@ set ttyfast
 
 " Colors
 
-colorscheme moonshine
+colorscheme gruvbox
+"colorscheme PaperColor
 highlight link Flake8_Error      Error
 highlight link Flake8_Warning    WarningMsg
 highlight link Flake8_Complexity WarningMsg
@@ -200,27 +255,27 @@ highlight ColorColumn ctermbg=233
 
 
 " Initializations and Plugin Specific Commands
-let python_highlight_all=1
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+let g:python_highlight_all=1
+let g:NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 let g:ctrlp_max_height = 30
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_quiet_messages = { "type": "style" }
-let g:UltiSnipsExpandTrigger="`"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsSnippetsDir = "~/.vim/bundle/ultisnips/UltiSnips"
-let g:UltiSnipsEditSplit="vertical"
+"let g:syntastic_python_checkers = ['flake8']
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_quiet_messages = { "type": "style" }
+let g:UltiSnipsExpandTrigger='`'
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+let g:UltiSnipsSnippetsDir = '~/.vim/bundle/ultisnips/UltiSnips'
+let g:UltiSnipsEditSplit='vertical'
 let g:flake8_quickfix_height=15
-let g:jedi#show_call_signatures = "0"
+let g:jedi#show_call_signatures = 1
 let g:rehash256 = 1
 let g:jedi#use_tabs_not_buffers = 1
 let g:solarized_termcolors=256
 let g:jedi#auto_close_doc=1
-let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = '<c-n>'
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .git
       \ --ignore .svn
@@ -231,5 +286,27 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 let g:auto_save_in_insert_mode = 0
 let g:auto_save=1
 let g:auto_save_no_updatetime = 1
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-let g:clang_library_path='/usr/lib/llvm-3.4/lib/libclang.so'
+"let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+"let g:clang_library_path='/usr/lib/llvm-3.8/lib/libclang-3.8.so.1'
+"let g:clang_complete_auto = 1
+"" Show clang errors in the quickfix window
+"let g:clang_complete_copen = 1
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:hardtime_showmsg = 1
+let g:hardtime_default_on = 1
+let g:rustfmt_autosave = 1
+"let g:color_coded_filetypes = ['c', 'cpp', 'objc', 'h']
+let g:python_highlight_all = 1
+let g:ale_linters = {
+            \   'markdown': ['proselint', 'vale'],
+            \   'python': ['flake8'],
+            \   'text': ['proselint', 'vale'],
+            \   'vim': ['vint'],
+            \   }
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_fixers = {'python': ['remove_trailing_lines', 'trim_whitespace', 'autopep8']}
+let g:startify_bookmarks = [ {'c': '~/.vimrc'}, {'z':'~/.zshrc' }, {'t':'~/.tmux.conf'}]
+
+set undofile
+set undodir=~/.vim/undodir

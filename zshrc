@@ -1,11 +1,11 @@
 # Path to your oh-my-zsh installation.
-  export ZSH=/root/.oh-my-zsh
+  export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="fishy"
+ZSH_THEME="agnoster"
 SAVEHIST=40000 # Number of entries
 HISTSIZE=40000
 HISTFILE=~/.zsh/history # File
@@ -99,7 +99,8 @@ fortune | cowsay | lolcat
 export P4PORT=10.102.1.8:1997
 export P4USER=amolag
 export P4PASSWD="freebsd123"
-export PATH=/root/anaconda2/bin:$PATH
+export PATH=/home/amol/anaconda2/bin:$PATH
+export PATH=/usr/local/go/bin:$PATH
 
 vimrem() {
     vi scp://root@$1/$2
@@ -125,3 +126,28 @@ alias lsd='cd ~/ws/trunk/DevTest/ninedottwo/'
 export M2_HOME=/usr/local/apache-maven/apache-maven-3.3.9
 export MAVEN_OPTS="-Xms256m -Xmx512m" # Very important to put the "m" on the end
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+
+export NVM_DIR="/home/amol/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# OPAM configuration
+. /home/amol/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+alias chaos='ssh amolagrawal@roc.cs.umass.edu'
+
+eval $(thefuck --alias)
+
+function snotebook ()
+{
+SPARK_PATH=~/spark
+
+export PYSPARK_DRIVER_PYTHON="jupyter"
+export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
+
+$SPARK_PATH/bin/pyspark --master local[2]
+}
+alias vi='vim'
+source /home/amol/Downloads/google-cloud-sdk/completion.zsh.inc
+source /home/amol/Downloads/google-cloud-sdk/path.zsh.inc
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ~/repos/liquidprompt/liquidprompt

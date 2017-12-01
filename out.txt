@@ -1,0 +1,158 @@
+Commandline: apt-get --yes --force-yes upgrade
+Commandline: apt-get --yes install lupin-casper linux-signed-generic-hwe-16.04 a11y-profile-manager apt-clone btrfs-tools cifs-utils cryptsetup cryptsetup-bin dmeventd dmraid dmsetup dpkg-repack efibootmgr fcitx-config-common fcitx-config-gtk fcitx-frontend-qt5 fcitx-hangul fcitx-module-cloudpinyin fcitx-ui-qimpanel fcitx-unikey fonts-arphic-ukai fonts-arphic-uming fwupdate fwupdate-signed gir1.2-timezonemap-1.0 gir1.2-xkl-1.0 gparted grub-gfxpayload-lists hunspell-de-at hunspell-de-ch hunspell-de-de hunspell-fr hunspell-fr-classical hunspell-ru hyphen-en-us hyphen-ru jfsutils keyutils libdevmapper-event1.02.1 libdmraid1.0.0.rc16 libefivar0 libfcitx-qt5-1 libfwup0 libgtkmm-2.4-1v5 libhangul-data libhangul1 liblvm2app2.2 liblvm2cmd2.02 liblzo2-2 libparted-fs-resize0 libpresage-data libpresage1v5 libqt5quickwidgets5 libreadline5 libtinyxml2.6.2v5 libzinnia0v5 lvm2 mokutil myspell-en-au myspell-es myspell-pt myspell-pt-br myspell-pt-pt mythes-de mythes-de-ch mythes-en-au mythes-it openoffice.org-hyphenation presage python-crypto python-ldb python-tdb python3-icu python3-pam rdate reiserfsprogs secureboot-db tegaki-zinnia-japanese ubiquity-slideshow-ubuntu wamerican wbrazilian wbritish wfrench witalian wngerman wogerman wportuguese wspanish wswiss xfsprogs ecryptfs-utils firefox-locale-de firefox-locale-en firefox-locale-es firefox-locale-fr firefox-locale-it firefox-locale-pt firefox-locale-ru firefox-locale-zh-hans libecryptfs1 libnss3-1d libreoffice-help-de libreoffice-help-en-gb libreoffice-help-en-us libreoffice-help-es libreoffice-help-fr libreoffice-help-it libreoffice-help-pt libreoffice-help-pt-br libreoffice-help-ru libreoffice-help-zh-cn libreoffice-help-zh-tw libreoffice-l10n-de libreoffice-l10n-en-gb libreoffice-l10n-en-za libreoffice-l10n-es libreoffice-l10n-fr libreoffice-l10n-it libreoffice-l10n-pt libreoffice-l10n-pt-br libreoffice-l10n-ru libreoffice-l10n-zh-cn libreoffice-l10n-zh-tw python-samba samba-common samba-common-bin thunderbird-locale-de thunderbird-locale-en thunderbird-locale-en-gb thunderbird-locale-en-us thunderbird-locale-es thunderbird-locale-es-ar thunderbird-locale-es-es thunderbird-locale-fr thunderbird-locale-it thunderbird-locale-pt thunderbird-locale-pt-br thunderbird-locale-pt-pt thunderbird-locale-ru thunderbird-locale-zh-cn thunderbird-locale-zh-hans thunderbird-locale-zh-hant thunderbird-locale-zh-tw archdetect-deb fcitx fcitx-bin fcitx-data fcitx-frontend-all fcitx-frontend-gtk2 fcitx-frontend-gtk3 fcitx-frontend-qt4 fcitx-module-dbus fcitx-module-kimpanel fcitx-module-lua fcitx-module-x11 fcitx-modules fcitx-mozc fcitx-pinyin fcitx-table fcitx-ui-classic grub-common grub-pc grub-pc-bin grub2-common hunspell-en-ca hunspell-en-gb hunspell-en-za hunspell-it hyphen-de hyphen-fr hyphen-it kpartx kpartx-boot language-pack-de language-pack-de-base language-pack-en language-pack-en-base language-pack-es language-pack-es-base language-pack-fr language-pack-fr-base language-pack-gnome-de language-pack-gnome-de-base language-pack-gnome-en language-pack-gnome-en-base language-pack-gnome-es language-pack-gnome-es-base language-pack-gnome-fr language-pack-gnome-fr-base language-pack-gnome-it language-pack-gnome-it-base language-pack-gnome-pt language-pack-gnome-pt-base language-pack-gnome-ru language-pack-gnome-ru-base language-pack-gnome-zh-hans language-pack-gnome-zh-hans-base language-pack-it language-pack-it-base language-pack-pt language-pack-pt-base language-pack-ru language-pack-ru-base language-pack-zh-hans language-pack-zh-hans-base libdebian-installer4 libfcitx-core0 libfcitx-qt0 metacity mozc-data mozc-server mozc-utils-gui myspell-en-gb myspell-en-za myspell-it mythes-en-us mythes-fr mythes-ru os-prober sbsigntool ubiquity ubiquity-casper ubiquity-frontend-gtk ubiquity-ubuntu-artwork
+Commandline: apt -y install curl
+Commandline: apt dist-upgrade -y
+Commandline: apt install -y --no-install-recommends gimp gifsicle gnome-software gnome-tweak-tool gpick inkscape polari nautilus sparkleshare transmission
+Commandline: apt install -y --no-install-recommends dconf-tools gnome-disk-utility inxi openssh-server p7zip-full powertop ppa-purge rsync samba ssh symlinks tlp
+Commandline: apt install -y autotools-dev bzr git git-core gtk-3-examples gtk-doc-tools icontool libgtk-3-dev nodejs npm optipng ruby rubygems x11-apps
+Commandline: apt install -y ubuntu-restricted-extras
+Commandline: apt install -y fonts-cantarell gnome-shell gnome-shell-extensions gnome-session gnome-terminal nautilus
+Commandline: apt install -y --no-install-recommends bijiben gedit gnome-builder gnome-calculator gnome-calendar gnome-clocks gnome-disk-utility gnome-documents gnome-logs gnome-maps gnome-music gnome-photos gnome-screenshot gnome-software gnome-system-monitor gnome-terminal gnome-weather
+Commandline: apt dist-upgrade -y
+Commandline: apt-get install unity-tweak-tool
+Commandline: apt-get install bleachbit
+Commandline: apt-get -y upgrade
+Commandline: apt-get install laptop-mode-tools
+Commandline: apt-get install tp-smapi-dkms acpi-call-dkms
+Commandline: apt-get install xserver-xorg-core
+Commandline: apt-get install xserver-xorg-input-libinput
+Commandline: apt-get install build-essential patch dh-autoreconf debhelper fakeroot libmtdev-dev libudev-dev libevdev-dev libwacom-dev
+Commandline: apt-get install vlc
+Commandline: apt-get install xserver-xorg-input-synaptics
+Commandline: apt-get install xfce4
+Commandline: apt-get install -y i3 i3lock i3status i3-wm
+Commandline: apt-get install -y xutils-dev xcb libxcb-composite0-dev
+Commandline: apt-get install -y doxygen
+Commandline: apt-get install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev
+Commandline: apt-get install -y libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev
+Commandline: apt-get install cmake -y
+Commandline: apt-get install -y numlockx
+Commandline: apt-get install -y feh
+Commandline: apt-get install -y lxappearance
+Commandline: apt-get install -y scrot
+Commandline: apt-get install -y compton
+Commandline: apt-get install -y unclutter
+Commandline: apt-get install -y pasystray paman paprefs pavumeter pulseaudio-module-zeroconf
+Commandline: apt-get install -y terminator
+Commandline: apt-get install conky -y
+Commandline: apt-get install -y zsh
+Commandline: apt-get install -y firefox adobe-flashplugin transmission-gtk skype hexchat
+Commandline: apt-get install -y geary
+Commandline: apt-get install -y nitrogen
+Commandline: apt-get install -y qt4-qtconfig
+Commandline: apt-get install -y scrot git htop wget curl sensord sysstat glances
+Commandline: apt-get install -y numlockx inxi dmidecode hddtemp net-tools mlocate hardinfo
+Commandline: apt-get install -y unetbootin
+Commandline: apt-get install -y vnstat
+Commandline: apt-get install -y screenfetch
+Commandline: apt-get install -y kazam
+Commandline: apt-get install -y catfish
+Commandline: apt-get install -y arandr
+Commandline: apt-get install -y vim vim-common
+Commandline: apt-get install -y gnome-system-monitor gnome-system-tools
+Commandline: apt-get install -y network-manager-openvpn
+Commandline: apt-get install -y network-manager-openvpn-gnome
+Commandline: apt-get install -y lightdm-gtk-greeter
+Commandline: apt-get install -y lightdm-gtk-greeter-settings
+Commandline: apt-get install -y brasero
+Commandline: apt-get install -y totem-plugins gromit
+Commandline: apt-get install -y rofi compton
+Commandline: apt-get install -y i3 i3-wm i3blocks i3lock i3status
+Commandline: apt-get install -y fonts-arphic-ukai fonts-arphic-uming
+Commandline: apt-get install -y gir1.2-appindicator3-0.1 gdebi
+Commandline: apt-get install -y caffeine
+Commandline: apt-get upgrade -y
+Commandline: apt-get install -y fontconfig-infinality
+Commandline: apt-get install -y moka-icon-theme
+Commandline: apt-get install tmux
+Commandline: apt-get install fortune cowsay lolcat
+Commandline: apt-get install synaptic
+Commandline: apt-get install arc-theme
+Commandline: apt-get install -y xbacklight
+Commandline: apt-get install spotify-client
+Commandline: apt-get install openvpn easy-rsa
+Commandline: apt-get install qbittorrent
+Commandline: /usr/bin/unattended-upgrade
+Commandline: apt-get install blueman
+Commandline: apt-get install cmus
+Commandline: apt-get install steam
+Commandline: apt-get install uget
+Commandline: synaptic
+Commandline: apt-get remove supertuxkart
+Commandline: apt-get remove supertuxkart-data
+Commandline: apt-get install gtypist
+Commandline: apt-get install clang
+Commandline: apt-get install python-dev python3-dev
+Commandline: apt-get install libnautilus-extension-dev
+Commandline: apt-get install python-gtk2-dev
+Commandline: synaptic
+Commandline: synaptic
+Commandline: apt-get install youtube-dl
+Commandline: apt-get install build-essential curl git m4 ruby texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
+Commandline: /usr/bin/unattended-upgrade
+Commandline: apt-get install xfce4-power-manager
+Commandline: apt-get install libsfml-dev
+Commandline: apt-get install glew-utils libglew-dev
+Commandline: /usr/bin/unattended-upgrade
+Commandline: synaptic
+Commandline: /usr/bin/unattended-upgrade
+Commandline: apt-get install python-qt4 python-pip
+Commandline: /usr/bin/unattended-upgrade
+Commandline: apt-get install calibre
+Commandline: apt-get install qtcreator autoconf autogen
+Commandline: /usr/bin/unattended-upgrade
+Commandline: apt-get install gparted
+Commandline: synaptic
+Commandline: apt-get install okular
+Commandline: apt-get install xvfb libav-tools xorg-dev libsdl2-dev swig cmake
+Commandline: /usr/bin/unattended-upgrade
+Commandline: apt-get install ruby-dev
+Commandline: apt-get install xpad
+Commandline: apt-get install pv
+Commandline: apt-get install golang python3-dev python-dev libcupti-dev libjpeg-turbo8-dev make tmux htop chromium-browser git cmake zlib1g-dev libjpeg-dev xvfb libav-tools xorg-dev python-opengl libboost-all-dev libsdl2-dev swig
+Commandline: apt-get install apt-transport-https ca-certificates curl software-properties-common
+Commandline: apt-get install docker-ce
+Commandline: /usr/bin/unattended-upgrade
+Commandline: apt-get install hugo
+Commandline: apt-get install texstudio
+Commandline: apt-get install julia
+Commandline: apt-get dist-upgrade julia
+Commandline: apt-get remove julia
+Commandline: apt-get install opam
+Commandline: apt-get install python3-pip
+Commandline: /usr/bin/unattended-upgrade
+Commandline: apt-get -y install vim-gnome ctags cscope git wget libpcre3 libpcre3-dev libyaml-dev python-pip python-dev libclang-dev
+Commandline: apt-get install texlive-fonts-recommended
+Commandline: apt-get install neovim
+Commandline: apt-get install texlive-luatex
+Commandline: apt-get install texlive-xetex
+Commandline: /usr/bin/unattended-upgrade
+Commandline: synaptic
+Commandline: apt-get install wkhtmltopdf
+Commandline: synaptic
+Commandline: apt-get install build-essential libclang-3.9-dev libncurses-dev libz-dev cmake xz-utils libpthread-workqueue-dev
+Commandline: apt-get install liblua5.2-dev lua5.2
+Commandline: apt-get upgrade firefox
+Commandline: apt-get -f install
+Commandline: apt-get -f install
+Commandline: apt-get install aptitude
+Commandline: apt-get remove --purge vim vim-runtime vim-gnome vim-tiny vim-gui-common
+Commandline: apt-get install liblua5.1-dev luajit libluajit-5.1 python-dev ruby-dev libperl-dev libncurses5-dev libatk1.0-dev libx11-dev libxpm-dev libxt-dev
+Commandline: apt-get install checkinstall
+Commandline: apt-get install sublime-text
+Commandline: apt-get install icedtea-netx
+Commandline: apt-get install icedtea-8-plugin
+Commandline: apt-get install mdp
+Commandline: apt-get install oracle-java8-installer
+Commandline: apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev python3-dev ruby-dev lua5.1 liblua5.1-dev libperl-dev git
+Commandline: apt-get install vim-nox
+Commandline: apt-get remove vim vim-runtime gvim
+Commandline: apt-get install global
+Commandline: apt-get install emacs
+Commandline: apt-get install -y thinkfan
+Commandline: apt-get install r-base
+Commandline: apt-get -f install
+Commandline: apt-get install bison
+Commandline: apt-get install ranger
+Commandline: apt-get install taskwarrior
+Commandline: apt-get install ncdu

@@ -1,0 +1,7 @@
+#!/bin/bash
+NUM_INSTANCES=`ps -ef | grep chrome | grep -v grep | awk '{print $2}' | wc -l`
+print $NUM_INSTANCES
+if [ "${NUM_INSTANCES}" -lt 1 ]
+then
+    exec google-chrome
+fi

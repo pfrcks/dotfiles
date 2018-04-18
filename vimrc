@@ -78,6 +78,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'cocopon/iceberg.vim'
 Plug 'wincent/terminus'
+Plug 'lervag/vimtex'
 
 Plug 'jiangmiao/auto-pairs'
 call plug#end()
@@ -302,6 +303,7 @@ let g:ale_linters = {
             \   'python': ['flake8'],
             \   'text': ['proselint', 'vale'],
             \   'vim': ['vint'],
+            \   'latex': ['lacheck'],
             \   }
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0

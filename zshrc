@@ -58,7 +58,7 @@ setopt SHARE_HISTORY # Share history between session/terminals
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting z)
+plugins=(git colored-man colorize github pip python brew osx zsh-syntax-highlighting)
 
 # User configuration
 
@@ -99,8 +99,6 @@ fortune | cowsay | lolcat
 export P4PORT=10.102.1.8:1997
 export P4USER=amolag
 export P4PASSWD="freebsd123"
-export PATH=/home/amol/anaconda2/bin:$PATH
-export PATH=/usr/local/go/bin:$PATH
 
 vimrem() {
     vi scp://root@$1/$2
@@ -133,6 +131,7 @@ export NVM_DIR="/home/amol/.nvm"
 # OPAM configuration
 . /home/amol/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 alias chaos='ssh amolagrawal@roc.cs.umass.edu'
+alias blk='ssh amolagrawal@blake2.cs.umass.edu'
 
 eval $(thefuck --alias)
 
@@ -145,9 +144,8 @@ export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 
 $SPARK_PATH/bin/pyspark --master local[2]
 }
-alias vi='vim'
-source /home/amol/Downloads/google-cloud-sdk/completion.zsh.inc
-source /home/amol/Downloads/google-cloud-sdk/path.zsh.inc
+alias vi='nvim'
+alias vim='nvim'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source ~/repos/liquidprompt/liquidprompt

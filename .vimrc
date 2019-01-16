@@ -1,3 +1,35 @@
+" NOTE !~~*********~~!
+" Please find below a short readme of the functionality enabled by this vimrc
+" file.
+"
+" Function Keys
+" ~~~~~~~~~~~~~
+" <F2> - Toggles Paste Style       : Useful when you want to paste text into vim.
+" <F4> - Removes trailing spaces   : Remove the black and pink colorations.
+" <F5> - Toggle colors in terminal : For different occasions.
+" <F6> - Run Script                : Saves and runs the script.
+" <F8> - Toggles Line Numbers      : For easier copying by mouse in vim.
+"
+" Plugin Shortcuts
+" ~~~~~~~~~~~~~~~~
+" ,cc     - Comments all the lines selected in visual mode
+" ,cSpace - Toggles the comment state of lines selected in visual mode.
+" Ctrl+l  - Move to the right split
+" Ctrl+h  - Move to the left split
+" Ctrl+z  - Saves and updates the file.
+" Ctrl+q  - Quit the file.
+" Ctrl+n  - Open file explorer in vim.
+" Ctrl+p  - Open file searcher in vim.
+" zM      - Close all folds
+" zR      - Open all folds
+
+" Jedi Vim Shortcuts
+" ~~~~~~~~~~~~~~~~~~
+" <leader>g             - Goto assignments
+" <leader>d             - Goto Definition
+" K                     - Show Documentation
+" <leader>n             - Show all usages
+" :Pyimport module name - Opens the module
 
 call plug#begin('~/.vim/bundle/')
 

@@ -33,54 +33,55 @@
 
 call plug#begin('~/.vim/bundle/')
 
-Plug 'vim-scripts/indentpython.vim'                   " Better Indentation
-"Plug 'davidhalter/jedi-vim'                           " Auto-completion and other IDE features
-"Plug 'scrooloose/syntastic', { 'on': [] }                           " Syntax checkers
+Plug 'vim-scripts/indentpython.vim'                   
+Plug 'davidhalter/jedi-vim'                           
 Plug 'w0rp/ale'
-Plug 'majutsushi/tagbar'                              " Gives an overview of file structure in a side pane
-Plug 'nvie/vim-flake8'                                " Syntax checker for syntastic
-Plug 'flazz/vim-colorschemes'                         " Pack of Colorschemes
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle'} " Fast and efficient File Browser
-Plug 'kien/ctrlp.vim'                                 " Fuzzy File Finder
+Plug 'majutsushi/tagbar'                              
+Plug 'nvie/vim-flake8'                                
+Plug 'flazz/vim-colorschemes'                         
+Plug 'ctrlpvim/ctrlp.vim'                         
+Plug 'airblade/vim-rooter'
+Plug 'scrooloose/nerdtree'
 if !has('nvim')
-    Plug 'tpope/vim-sensible'                             " Sensible defaults for vim
+    Plug 'tpope/vim-sensible'                             
 endif
 Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips', { 'on': [] }                 " Snippets expansion for vim
-Plug 'honza/vim-snippets'                             " Support for Ultisnips
-Plug 'godlygeek/tabular'                              " For alignment of markes
-Plug 'scrooloose/nerdcommenter'                       " Easy commenting
+Plug 'SirVer/ultisnips'                 
+Plug 'honza/vim-snippets'                             
+Plug 'scrooloose/nerdcommenter'                       
 Plug 'tmhedberg/matchit'
-Plug 'voithos/vim-python-matchit'
-Plug 'Shougo/denite.nvim'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'tommcdo/vim-exchange'
-Plug 'will133/vim-dirdiff'
-Plug 'tpope/vim-surround'
 Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'rust-lang/rust.vim'
-Plug 'vim-scripts/c.vim'
-Plug 'xolox/vim-notes'
-Plug 'xolox/vim-misc'
 Plug 'reedes/vim-lexical'
 Plug 'fisadev/vim-isort'
-Plug 'Shougo/denite.nvim'
-"Plug 'jeaye/color_coded'
-Plug 'maralla/completor.vim'
-Plug 'kh3phr3n/python-syntax'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'zchee/deoplete-jedi'
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'cocopon/iceberg.vim'
+Plug 'vimwiki/vimwiki'
+Plug 'Shougo/echodoc.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'machakann/vim-highlightedyank'
+Plug 'justinmk/vim-sneak'
+Plug 'zchee/deoplete-clang'
+Plug 'simnalamburt/vim-mundo'
+Plug 'deathlyfrantic/deoplete-spell'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 Plug 'wincent/terminus'
 Plug 'lervag/vimtex'
-
-Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 syntax on                                             " Enable syntax highlighting
@@ -130,9 +131,7 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <space> za                                                    " Folding with spacebar
 noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
 noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
-noremap <Leader>e :quit<CR>                                            " Quit with , + e
-map <Leader>n <esc>:tabprevious<CR>                                    " Easier moving between tabs
-map <Leader>m <esc>:tabnext<CR>
+map <Leader>m <esc>:NERDTreeFind<CR>
 vnoremap <Leader>s :sort<CR>                                           " Map sort function to a key
 vnoremap < <gv                                                         " Better indentation
 vnoremap > >gv                                                         " Better indentation
@@ -157,22 +156,17 @@ nmap <Leader><space> :TagbarToggle<CR>                                 " ,space 
 nnoremap <F8> :call SCLToggle()<cr>
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[                                               " Esc Esc disables search highlighting
-nnoremap <Leader>k :YcmCompleter GetDoc <CR>
 cmap w!! w !sudo tee >/dev/null %                                      " Open again in sudo
-map <C-n> :NERDTreeToggle<CR>                                          " Toggle NerdTree
+map <C-c> :NERDTreeToggle<CR>                                          " Toggle NerdTree
 map <Leader>bb Oimport ipdb; ipdb.set_trace() # BREAKPOINT<esc>         " Debugging python
 noremap Y y$                                                           " Yank till end of line
-" Helper Functions
+
+
+
 
 function! SCLToggle()
     set nonumber!
     set relativenumber!
-    "if g:syntastic_enable_signs == 1
-        "let g:syntastic_enable_signs=0
-    "else
-        "let g:syntastic_enable_signs=1
-    "endif
-    "echo g:syntastic_enable_signs
 endfunction
 function! LinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
@@ -188,8 +182,9 @@ function! LinterStatus() abort
 endfunction
 function! ProseMode()
   call goyo#execute(0, [])
-  set spell noci nosi noai nolist noshowmode noshowcmd
+  set spell noci nosi noai nolist noshowmode noshowcmd wrap
   set complete+=s
+  map <Leader>n "ap
   if !has('gui_running')
     let g:solarized_termcolors=256
   endif
@@ -203,10 +198,12 @@ nmap \p :ProseMode<CR>
 " Set commands
 
 "set nocompatible              " required
+"set cmdheight=2
 set virtualedit=onemore
 set statusline=%{LinterStatus()}
 set statusline+=\ %t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
 set statusline+=\ %{strftime(\"%H:%M\")}
+"set statusline+=%{gutentags#statusline()}
 set splitbelow
 set splitright
 set foldmethod=indent
@@ -218,7 +215,7 @@ set number
 set relativenumber
 set backspace=indent,eol,start
 set pastetoggle=<F2>
-set clipboard+=unnamedplus
+set clipboard=unnamed
 set guioptions+=a
 set nowrap  " don't automatically wrap on load
 set formatoptions-=t   " don't automatically wrap text when typing
@@ -241,12 +238,12 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set ttyfast
+set mouse=a
 
 
 " Colors
 
 colorscheme gruvbox
-"colorscheme PaperColor
 highlight link Flake8_Error      Error
 highlight link Flake8_Warning    WarningMsg
 highlight link Flake8_Complexity WarningMsg
@@ -258,24 +255,13 @@ highlight ColorColumn ctermbg=233
 " Initializations and Plugin Specific Commands
 let g:python_highlight_all=1
 let g:NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+"autocmd VimEnter * NERDTree
 let g:ctrlp_max_height = 30
-"let g:syntastic_python_checkers = ['flake8']
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 0
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_quiet_messages = { "type": "style" }
-let g:UltiSnipsExpandTrigger='`'
-let g:UltiSnipsJumpForwardTrigger='<c-b>'
-let g:UltiSnipsJumpBackwardTrigger='<c-z>'
-let g:UltiSnipsSnippetsDir = '~/.vim/bundle/ultisnips/UltiSnips'
-let g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:flake8_quickfix_height=15
-let g:jedi#show_call_signatures = 1
 let g:rehash256 = 1
-let g:jedi#use_tabs_not_buffers = 1
 let g:solarized_termcolors=256
-let g:jedi#auto_close_doc=1
 let g:SuperTabDefaultCompletionType = '<c-n>'
 let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .git
@@ -287,16 +273,10 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
 let g:auto_save_in_insert_mode = 0
 let g:auto_save=1
 let g:auto_save_no_updatetime = 1
-"let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-"let g:clang_library_path='/usr/lib/llvm-3.8/lib/libclang-3.8.so.1'
-"let g:clang_complete_auto = 1
-"" Show clang errors in the quickfix window
-"let g:clang_complete_copen = 1
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 let g:hardtime_showmsg = 1
 let g:hardtime_default_on = 1
 let g:rustfmt_autosave = 1
-"let g:color_coded_filetypes = ['c', 'cpp', 'objc', 'h']
 let g:python_highlight_all = 1
 let g:ale_linters = {
             \   'markdown': ['proselint', 'vale'],
@@ -307,8 +287,54 @@ let g:ale_linters = {
             \   }
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
-let g:ale_fixers = {'python': ['remove_trailing_lines', 'trim_whitespace', 'autopep8']}
+let g:ale_fixers = {'python': ['remove_trailing_lines', 'trim_whitespace', 'autopep8'], 'typescript' : ['tslint']}
+let g:ale_fix_on_save = 1
 let g:startify_bookmarks = [ {'c': '~/.vimrc'}, {'z':'~/.zshrc' }, {'t':'~/.tmux.conf'}]
+
+let g:jedi#popup_on_dot = 0
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = "<leader>d"
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#rename_command = "<leader>r"
+let g:jedi#show_call_signatures = "1"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#smart_auto_mappings = 0
 
 set undofile
 set undodir=~/.vim/undodir
+"let g:completor_python_binary = '/Users/amagrawal/code/homebrew/bin/python'
+let g:python_host_prog = '/home/amol/anaconda2/bin/python'
+let g:python3_host_prog = '/home/amol/anaconda3/bin/python'
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd VimEnter * wincmd p
+tnoremap <Esc> <C-\><C-n>
+let g:deoplete#enable_at_startup = 1
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
+let g:highlightedyank_highlight_duration = 200
+let g:sneak#label = 1
+"map <Leader> <Plug>(easymotion-prefix)
+let g:multi_cursor_select_all_word_key = '<C-g>'
+noremap <Leader>f :Files<CR>
+noremap <Leader>b :Buffers<CR>
+noremap <Leader>t :Tags<CR>
+let g:gutentags_cache_dir = '~/.vim/gutentags/'
+let g:gutentags_ctags_exclude = ['*.css', '*.html', '*.js', '*.json', '*.xml',
+                            \ '*.phar', '*.ini', '*.rst', '*.md',
+                            \ '*vendor/*/test*', '*vendor/*/Test*',
+                            \ '*vendor/*/fixture*', '*vendor/*/Fixture*',
+                            \ '*var/cache*', '*var/log*']
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+let g:deoplete#sources#clang#libclang_path = '/usr/lib/x86_64-linux-gnu/libclang-6.0.so.1'
+let g:deoplete#sources#clang#clang_header = '/usr/lib/clang/6.0.0/'
+let g:ale_cpp_clangtidy_options = '-Wall -std=c++11 -x c++'
+let g:ale_cpp_clangcheck_options = '-- -Wall -std=c++11 -x c++'
+let g:vimwiki_list = [{ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_global_ext=0
+let g:goyo_width=100
+let g:vim_markdown_math = 1

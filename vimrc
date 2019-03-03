@@ -1,35 +1,3 @@
-" NOTE !~~*********~~!
-" Please find below a short readme of the functionality enabled by this vimrc
-" file.
-"
-" Function Keys
-" ~~~~~~~~~~~~~
-" <F2> - Toggles Paste Style       : Useful when you want to paste text into vim.
-" <F4> - Removes trailing spaces   : Remove the black and pink colorations.
-" <F5> - Toggle colors in terminal : For different occasions.
-" <F6> - Run Script                : Saves and runs the script.
-" <F8> - Toggles Line Numbers      : For easier copying by mouse in vim.
-"
-" Plugin Shortcuts
-" ~~~~~~~~~~~~~~~~
-" ,cc     - Comments all the lines selected in visual mode
-" ,cSpace - Toggles the comment state of lines selected in visual mode.
-" Ctrl+l  - Move to the right split
-" Ctrl+h  - Move to the left split
-" Ctrl+z  - Saves and updates the file.
-" Ctrl+q  - Quit the file.
-" Ctrl+n  - Open file explorer in vim.
-" Ctrl+p  - Open file searcher in vim.
-" zM      - Close all folds
-" zR      - Open all folds
-
-" Jedi Vim Shortcuts
-" ~~~~~~~~~~~~~~~~~~
-" <leader>g             - Goto assignments
-" <leader>d             - Goto Definition
-" K                     - Show Documentation
-" <leader>n             - Show all usages
-" :Pyimport module name - Opens the module
 
 call plug#begin('~/.vim/bundle/')
 
@@ -82,18 +50,15 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'wincent/terminus'
 Plug 'lervag/vimtex'
+Plug 'zchee/deoplete-clang'
+Plug 'simnalamburt/vim-mundo'
+Plug 'deathlyfrantic/deoplete-spell'
 call plug#end()
 
 syntax on                                             " Enable syntax highlighting
 let g:mapleader = ','
 
 " Autocommands
-
-augroup load_on_insert                               " Lazy loading of Ultisnips and Jedi-Vim : Saves time
-  autocmd!
-  autocmd InsertEnter * call plug#load('ultisnips')
-                     \| autocmd! load_on_insert
-augroup END
 
 augroup lexical
   autocmd!
@@ -304,8 +269,18 @@ let g:jedi#smart_auto_mappings = 0
 set undofile
 set undodir=~/.vim/undodir
 "let g:completor_python_binary = '/Users/amagrawal/code/homebrew/bin/python'
-let g:python_host_prog = '/home/amol/anaconda2/bin/python'
-let g:python3_host_prog = '/home/amol/anaconda3/bin/python'
+
+if has("unix")
+    let s:uname = system("uname")
+    if s:uname == "Darwin\n"
+        let g:python3_host_prog = '/Users/amol/anaconda3/bin/python'
+        let g:python_host_prog = '/Users/amol/anaconda2/bin/python'
+    else
+        let g:python_host_prog = '/home/amol/anaconda2/bin/python'
+        let g:python3_host_prog = '/home/amol/anaconda3/bin/python'
+    endif
+endif
+
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd VimEnter * wincmd p
 tnoremap <Esc> <C-\><C-n>
@@ -338,3 +313,5 @@ let g:vimwiki_list = [{ 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext=0
 let g:goyo_width=100
 let g:vim_markdown_math = 1
+let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/6.0.1/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header = '/usr/local/Cellar/llvm/6.0.1/lib/clang'

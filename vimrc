@@ -273,7 +273,7 @@ set undodir=~/.vim/undodir
 if has("unix")
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
-        let g:python3_host_prog = '/Users/amol/anaconda3/bin/python'
+        let g:python3_host_prog = '/Users/anduril/anaconda3/bin/python'
         "let g:python_host_prog = '/Users/amol/anaconda2/bin/python'
     else
         "let g:python_host_prog = '/home/amol/anaconda2/bin/python'
@@ -313,5 +313,3 @@ let g:vimwiki_list = [{ 'syntax': 'markdown', 'ext': '.md'}]
 let g:vimwiki_global_ext=0
 let g:goyo_width=100
 let g:vim_markdown_math = 1
-let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/6.0.1/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header = '/usr/local/Cellar/llvm/6.0.1/lib/clang'

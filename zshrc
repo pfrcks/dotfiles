@@ -112,6 +112,10 @@ findprocess() {
     ps -ef | grep $1
 }
 
+toc() {
+    markdown-toc -i $1
+}
+
 alias findn=findnamefromroot
 alias greps=findstringinfile
 alias vir=vimrem

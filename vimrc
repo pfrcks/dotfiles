@@ -1,22 +1,22 @@
 
 call plug#begin('~/.vim/bundle/')
 
-Plug 'vim-scripts/indentpython.vim'                   
-Plug 'davidhalter/jedi-vim'                           
+Plug 'vim-scripts/indentpython.vim'
+Plug 'davidhalter/jedi-vim'
 Plug 'w0rp/ale'
-Plug 'majutsushi/tagbar'                              
-Plug 'nvie/vim-flake8'                                
-Plug 'flazz/vim-colorschemes'                         
-Plug 'ctrlpvim/ctrlp.vim'                         
+Plug 'majutsushi/tagbar'
+Plug 'nvie/vim-flake8'
+Plug 'flazz/vim-colorschemes'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-rooter'
 Plug 'scrooloose/nerdtree'
 if !has('nvim')
-    Plug 'tpope/vim-sensible'                             
+    Plug 'tpope/vim-sensible'
 endif
 Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'                 
-Plug 'honza/vim-snippets'                             
-Plug 'scrooloose/nerdcommenter'                       
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'scrooloose/nerdcommenter'
 Plug 'tmhedberg/matchit'
 Plug 'vim-scripts/vim-auto-save'
 Plug 'christoomey/vim-tmux-navigator'
@@ -53,6 +53,7 @@ Plug 'lervag/vimtex'
 Plug 'zchee/deoplete-clang'
 Plug 'simnalamburt/vim-mundo'
 Plug 'deathlyfrantic/deoplete-spell'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 syntax on                                             " Enable syntax highlighting

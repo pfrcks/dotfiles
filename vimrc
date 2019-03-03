@@ -274,9 +274,9 @@ if has("unix")
     let s:uname = system("uname")
     if s:uname == "Darwin\n"
         let g:python3_host_prog = '/Users/amol/anaconda3/bin/python'
-        let g:python_host_prog = '/Users/amol/anaconda2/bin/python'
+        "let g:python_host_prog = '/Users/amol/anaconda2/bin/python'
     else
-        let g:python_host_prog = '/home/amol/anaconda2/bin/python'
+        "let g:python_host_prog = '/home/amol/anaconda2/bin/python'
         let g:python3_host_prog = '/home/amol/anaconda3/bin/python'
     endif
 endif

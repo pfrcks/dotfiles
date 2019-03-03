@@ -8,7 +8,7 @@
 ZSH_THEME="agnoster"
 SAVEHIST=40000 # Number of entries
 HISTSIZE=40000
-HISTFILE=~/.zsh/history # File
+HISTFILE=~/.zsh_history
 setopt APPEND_HISTORY # Don't erase history
 setopt EXTENDED_HISTORY # Add additional data to history like timestamp
 setopt INC_APPEND_HISTORY # Add immediately
@@ -16,6 +16,7 @@ setopt HIST_FIND_NO_DUPS # Don't show duplicates in search
 setopt HIST_IGNORE_SPACE # Don't preserve spaces. You may want to turn it off
 setopt NO_HIST_BEEP # Don't beep
 setopt SHARE_HISTORY # Share history between session/terminals
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -58,7 +59,7 @@ setopt SHARE_HISTORY # Share history between session/terminals
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man colorize github pip python brew osx zsh-syntax-highlighting)
+plugins=(git colored-man colorize pip python zsh-syntax-highlighting z zsh-completions)
 
 # User configuration
 
@@ -68,7 +69,10 @@ plugins=(git colored-man colorize github pip python brew osx zsh-syntax-highligh
 source $ZSH/oh-my-zsh.sh
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
+export LC_ALL=en_US.UTF-8
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
+export LANG=en_US.UTF-8
 fortune | cowsay | lolcat
 
 # You may need to manually set your language environment
@@ -96,14 +100,6 @@ fortune | cowsay | lolcat
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export P4PORT=10.102.1.8:1997
-export P4USER=amolag
-export P4PASSWD="freebsd123"
-
-vimrem() {
-    vi scp://root@$1/$2
-}
-
 findnamefromroot() {
     find / -name $1
 }
@@ -120,32 +116,84 @@ alias findn=findnamefromroot
 alias greps=findstringinfile
 alias vir=vimrem
 alias findp=findprocess
-alias lsd='cd ~/ws/trunk/DevTest/ninedottwo/'
-export M2_HOME=/usr/local/apache-maven/apache-maven-3.3.9
-export MAVEN_OPTS="-Xms256m -Xmx512m" # Very important to put the "m" on the end
-export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
-export NVM_DIR="/home/amol/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# OPAM configuration
-. /home/amol/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-alias chaos='ssh amolagrawal@roc.cs.umass.edu'
+alias gyp='ssh amolagrawal@gypsum-gateway.cs.umass.edu'
 alias blk='ssh amolagrawal@blake2.cs.umass.edu'
+alias fzf='fzf --preview="head -$LINES {}"'
 
-eval $(thefuck --alias)
 
-function snotebook ()
-{
-SPARK_PATH=~/spark
+#function snotebook ()
+#{
+#SPARK_PATH=~/spark
 
-export PYSPARK_DRIVER_PYTHON="jupyter"
-export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
+#export PYSPARK_DRIVER_PYTHON="jupyter"
+#export PYSPARK_DRIVER_PYTHON_OPTS="notebook"
 
-$SPARK_PATH/bin/pyspark --master local[2]
-}
+#$SPARK_PATH/bin/pyspark --master local[2]
+#}
 alias vi='nvim'
 alias vim='nvim'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+alias icat="kitty +kitten icat"
+alias mas='cd /home/amol/repos/umass'
+#alias blue="a2dp.py 0C:A6:94:60:BC:68"
+#source /home/amol/Downloads/google-cloud-sdk/completion.zsh.inc
+#source /home/amol/Downloads/google-cloud-sdk/path.zsh.inc
+
+[ -f ~/.fzf/shell/completion.zsh ] && source ~/.fzf/shell/completion.zsh
+[ -f ~/.fzf/shell/key-bindings.zsh ] && source ~/.fzf/shell/key-bindings.zsh
 source ~/repos/liquidprompt/liquidprompt
+
+# added by Anaconda3 installer
+#export PATH="/home/amol/anaconda3/bin:$PATH"
+
+
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"
+export CUDA_HOME=/usr/local/cuda
+#export MALMO_XSD_PATH="~/repos/malmo/Schemas"
+export MKL_THREADING_LAYER=GNU
+
+#cat ~/.cache/wal/sequences
+
+## To add support for TTYs this line can be optionally added.
+#source ~/.cache/wal/colors-tty.sh
+export PATH=$PATH:/opt/pig/bin
+export PATH=$PATH:/usr/local/cuda/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"
+
+export PATH=/usr/share/swift/usr/bin:/opt/ros/kinetic/bin:/home/amol/anaconda3/bin:/usr/local/go/bin:/home/amol/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/amol/.fzf/bin:/opt/pig/bin:/usr/local/cuda/bin
+eval $(thefuck --alias)
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
+# TMUX
+#if which tmux >/dev/null 2>&1; then
+    ##if not inside a tmux session, and if no session is started, start a new session
+    #test -z "$TMUX" && (tmux attach || tmux new-session)
+#fi
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+
+case `uname` in
+  Darwin)
+    # commands for OS X go here
+  ;;
+  Linux)
+    # commands for Linux go here
+    autoload -Uz compinit
+    compinit
+    # Completion for kitty
+    kitty + complete setup zsh | source /dev/stdin
+    install() {
+        sudo apt-get install $1
+    }
+    alias update='sudo apt-get update'
+
+  ;;
+  FreeBSD)
+    # commands for FreeBSD go here
+  ;;
+esac

@@ -8,7 +8,7 @@ Plug 'majutsushi/tagbar'
 Plug 'nvie/vim-flake8'
 Plug 'flazz/vim-colorschemes'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'airblade/vim-rooter'
+"Plug 'airblade/vim-rooter'
 Plug 'scrooloose/nerdtree'
 if !has('nvim')
     Plug 'tpope/vim-sensible'

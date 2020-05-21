@@ -186,7 +186,7 @@ set mouse=a
 
 " Colors
 
-colorscheme gruvbox
+silent! colorscheme gruvbox
 highlight link Flake8_Error      Error
 highlight link Flake8_Warning    WarningMsg
 highlight link Flake8_Complexity WarningMsg

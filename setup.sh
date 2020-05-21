@@ -12,13 +12,13 @@ files="vimrc zshrc tmux.conf"    # list of files/folders to symlink in homedir
 
 ##########
 
-mkdir -p ~/repos
-cd ~/repos
-git clone https://github.com/pfrcks/dotfiles
-
 sudo apt update
 sudo apt install zsh tmux git python3 python3-pip lolcat cowsay fortune neovim -y
 chsh -s /bin/zsh
+
+mkdir -p ~/repos
+cd ~/repos
+git clone https://github.com/pfrcks/dotfiles
 
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting

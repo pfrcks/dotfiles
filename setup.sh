@@ -13,7 +13,7 @@ files="vimrc zshrc tmux.conf"    # list of files/folders to symlink in homedir
 ##########
 
 sudo apt update
-sudo apt install zsh tmux git python3 python3-pip lolcat cowsay fortune neovim -y
+sudo apt install zsh tmux git python3 python3-pip lolcat cowsay fortune neovim curl -y
 chsh -s /bin/zsh
 
 mkdir -p ~/repos
@@ -24,6 +24,7 @@ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
 git clone https://github.com/nojhan/liquidprompt
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 pip3 install neovim thefuck
 
@@ -40,10 +41,11 @@ echo "...done"
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
 for file in $files; do
     echo "Moving any existing dotfiles from ~ to $olddir"
-    mv ~/.$file ~/olddir/
+    mv ~/.$file $olddir/
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
 
 mkdir -p ~/.config/nvim
 ln -s $dir/init.vim ~/.config/nvim/init.vim
+vim +PlugInstall +qall
